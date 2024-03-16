@@ -19,9 +19,21 @@ public class CreateMemberService {
 
     @Transactional
     public Long create(CreateMemberParam param) {
+        validateParam(param);
+
         Member member = param.toMember();
         memberRepository.save(member);
         return member.getId();
+    }
+
+    private void validateParam(CreateMemberParam param) {
+        if (memberRepository.existsByEmail(Email.of(param.getEmail()))) {
+            throw new DuplicateEmailException();
+        }
+
+        if (memberRepository.existsByNickname(Nickname.of(param.getNickname()))) {
+            throw new DuplicateNicknameException();
+        }
     }
 
     @Getter
@@ -38,5 +50,4 @@ public class CreateMemberService {
                     .build();
         }
     }
-
 }
