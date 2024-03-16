@@ -1,20 +1,13 @@
 package com.hkleev2.peacekeeper.domain.space;
 
-import com.hkleev2.peacekeeper.domain.common.CreatedDateTime;
-import com.hkleev2.peacekeeper.domain.member.MemberRepository;
-import com.hkleev2.peacekeeper.domain.member.model.Email;
-import com.hkleev2.peacekeeper.domain.member.model.Member;
-import com.hkleev2.peacekeeper.domain.member.model.Nickname;
 import com.hkleev2.peacekeeper.domain.space.model.Space;
+import com.hkleev2.peacekeeper.domain.space.model.SpaceMember;
 import com.hkleev2.peacekeeper.domain.space.model.Spacename;
-import com.hkleev2.peacekeeper.fixture.MemberFixture;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +18,8 @@ class SpaceRepositoryTest {
 
     @Autowired
     private SpaceRepository spaceRepository;
+    @Autowired
+    private SpaceMemberRepository spaceMemberRepository;
 
     @Test
     void createSpace() {
@@ -42,6 +37,21 @@ class SpaceRepositoryTest {
 
         assertThat(space.getId()).isNotNull();
         assertThat(space.getSpaceKey()).isNotNull();
+    }
+
+    @Test
+    void spaceMember() {
+        Long spaceId = 1L;
+        Long memberId = 1L;
+
+        SpaceMember spaceMember = SpaceMember.builder()
+                .spaceId(spaceId)
+                .memberId(memberId)
+                .build();
+
+        spaceMemberRepository.save(spaceMember);
+
+        assertThat(spaceMember.getId()).isNotNull();
     }
 
 }

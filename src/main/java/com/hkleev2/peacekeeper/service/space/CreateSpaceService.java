@@ -22,7 +22,6 @@ public class CreateSpaceService {
     public Long create(CreateSpaceParam param) {
         Space space = param.toSpace();
         spaceRepository.save(space);
-        System.out.print("");
         return space.getId();
     }
 
