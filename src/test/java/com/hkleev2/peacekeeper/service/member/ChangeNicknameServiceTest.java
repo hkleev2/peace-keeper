@@ -37,7 +37,11 @@ public class ChangeNicknameServiceTest {
                 .build();
         memberRepository.save(newMember);
 
-        Assertions.assertThatThrownBy(() -> changeNicknameService.changeNickname(newMember.getId(), givenMember.getNickname().getValue()))
+        ChangeNicknameService.ChangeNicknameParam param = ChangeNicknameService.ChangeNicknameParam.builder()
+                .nickname(givenMember.getNickname().getValue())
+                .build();
+
+        Assertions.assertThatThrownBy(() -> changeNicknameService.changeNickname(newMember.getId(), param))
                 .isExactlyInstanceOf(DuplicateNicknameException.class);
     }
 
@@ -54,7 +58,12 @@ public class ChangeNicknameServiceTest {
         memberRepository.save(newMember);
 
         String notDupNickname = "notDup2";
-        changeNicknameService.changeNickname(newMember.getId(), notDupNickname);
+
+        ChangeNicknameService.ChangeNicknameParam param = ChangeNicknameService.ChangeNicknameParam.builder()
+                .nickname(notDupNickname)
+                .build();
+
+        changeNicknameService.changeNickname(newMember.getId(), param);
 
         Member updatedMember = memberRepository.findById(newMember.getId()).orElseThrow();
         assertThat(updatedMember.getNickname().getValue()).isEqualTo(notDupNickname);
