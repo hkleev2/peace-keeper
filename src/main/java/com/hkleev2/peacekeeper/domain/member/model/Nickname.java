@@ -11,8 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Nickname implements Serializable {
 
-    private static final String ALPHANUMERIC_HYPHEN_UNDERSCORE_REGEX = "[a-zA-Z0-9_-]+";
-    private static final String KOREAN_REGEX = "[가-힣]+";
+    private static final String NICKNAME_REG = "[가-힣a-zA-Z0-9_-]+";
 
     private String value;
 
@@ -36,7 +35,7 @@ public class Nickname implements Serializable {
     }
 
     private void validateCharacter(String value) {
-        if (!value.matches(ALPHANUMERIC_HYPHEN_UNDERSCORE_REGEX) && !value.matches(KOREAN_REGEX)) {
+        if (!value.matches(NICKNAME_REG)) {
             throw new IllegalArgumentException("닉네임에는 알파벳, 숫자, 밑줄(_), 하이픈(-) 및 한글 문자만 사용할 수 있습니다.");
         }
     }

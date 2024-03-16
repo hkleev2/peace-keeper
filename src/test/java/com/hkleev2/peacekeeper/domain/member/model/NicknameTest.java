@@ -6,10 +6,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class NicknameTest {
 
+    @DisplayName("닉네임 객체 생성 성공")
     @ParameterizedTest
     @ValueSource(strings = {"testnick", "한글닉네임"})
     void testNicknameOfValid(String nickname) {
