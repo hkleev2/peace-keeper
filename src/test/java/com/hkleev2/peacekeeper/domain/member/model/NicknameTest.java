@@ -10,12 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NicknameTest {
 
-    @DisplayName("닉네임 생성 성공")
-    @Test
-    void testNicknameOfValid() {
-        String validNick = "TestNick";
-        Nickname nick = Nickname.of(validNick);
-        assertEquals(validNick, nick.getValue());
+    @ParameterizedTest
+    @ValueSource(strings = {"testnick", "한글닉네임"})
+    void testNicknameOfValid(String nickname) {
+        Nickname.of(nickname);
     }
 
     @DisplayName("null, 공백, 공백문자 예외")
@@ -26,22 +24,24 @@ class NicknameTest {
         assertThrows(IllegalArgumentException.class, () -> Nickname.of(input));
     }
 
-    @DisplayName("짧은 문자열")
+    @DisplayName("짧은 문자열 예외")
     @Test
     void testNicknameOfShortLength() {
         assertThrows(IllegalArgumentException.class, () -> Nickname.of("a"));
     }
 
-    @DisplayName("긴 문자열")
+    @DisplayName("긴 문자열 예외")
     @Test
     void testNicknameOfLongLength() {
         assertThrows(IllegalArgumentException.class, () -> Nickname.of("12345678901"));
     }
 
-    @DisplayName("허용하지 않는 문자열")
+    @DisplayName("허용하지 않는 문자열 예외")
     @Test
     void testNicknameOfInvalidCharacters() {
         assertThrows(IllegalArgumentException.class, () -> Nickname.of("Nick%$#Name"));
     }
+
+
 
 }
