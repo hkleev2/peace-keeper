@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: peace-keeper
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/peacekeeper?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 123qwe
+  jpa:
+    hibernate:
+      ddl-auto: create
