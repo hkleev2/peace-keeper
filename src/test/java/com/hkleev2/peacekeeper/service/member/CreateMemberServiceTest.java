@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 
+@DisplayName("회원 생성")
 @SpringBootTest
 class CreateMemberServiceTest {
 
