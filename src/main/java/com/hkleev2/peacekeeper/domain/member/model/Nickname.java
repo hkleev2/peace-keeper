@@ -37,7 +37,7 @@ public class Nickname implements Serializable {
 
     private void validateCharacter(String value) {
         if (!value.matches(ALPHANUMERIC_HYPHEN_UNDERSCORE_REGEX) && !value.matches(KOREAN_REGEX)) {
-            throw new IllegalArgumentException("The nickname contains invalid characters. You can only use alphabets, numbers, underscore (_), hyphen (-) and Korean characters.");
+            throw new IllegalArgumentException("닉네임에는 알파벳, 숫자, 밑줄(_), 하이픈(-) 및 한글 문자만 사용할 수 있습니다.");
         }
     }
 
