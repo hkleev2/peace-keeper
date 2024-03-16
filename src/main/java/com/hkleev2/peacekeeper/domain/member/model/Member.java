@@ -29,4 +29,7 @@ public class Member {
     @AttributeOverride(name = "value", column = @Column(name = "created_datetime"))
     private CreatedDateTime createdDateTime;
 
+    public void changeNickname(Nickname nickname) {
+        this.nickname = nickname;
+    }
 }
