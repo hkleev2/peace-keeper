@@ -18,7 +18,7 @@ public class ChangeSpaceService {
     private final SpaceRepository spaceRepository;
 
     public Boolean checkSpaceAdmin(Long loginId, Long spaceId) throws CheckSpaceAdminException {
-        Space space = spaceRepository.findById(spaceId).orElseThrow();
+        Space space = findSpace(spaceId);
 
         if (space.getAdminMemberId() == loginId) {
             return true;
