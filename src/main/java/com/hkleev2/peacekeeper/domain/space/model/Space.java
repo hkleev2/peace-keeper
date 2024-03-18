@@ -1,6 +1,7 @@
 package com.hkleev2.peacekeeper.domain.space.model;
 
 import com.hkleev2.peacekeeper.domain.common.CreatedDateTime;
+import com.hkleev2.peacekeeper.domain.member.model.Nickname;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,4 +32,8 @@ public class Space {
     @CreatedDate
     @AttributeOverride(name = "value", column = @Column(name = "created_datetime"))
     private CreatedDateTime createdDateTime;
+
+    public void changeSpacekname(Spacename spacename) {
+        this.spacename = spacename;
+    }
 }

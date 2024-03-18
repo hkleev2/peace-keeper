@@ -8,7 +8,7 @@ public class MemberUtil {
     public static void chkLogin(HttpSession session) throws CheckLoginException {
 
         if (isLogin(session)) {
-            throw new CheckLoginException("로그인 후 이용 가능 합니다.");
+            throw new CheckLoginException();
         }
     }
 
