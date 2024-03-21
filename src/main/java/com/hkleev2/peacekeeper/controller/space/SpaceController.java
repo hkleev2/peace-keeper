@@ -64,9 +64,6 @@ public class SpaceController {
 
     @PostMapping("/addspacemember")
     public Long addSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param, HttpServletRequest request) throws CheckLoginException {
-        HttpSession session = request.getSession();
-        MemberUtil.chkLogin(session);
-
         return spaceMemberService.addSpaceMember(param);
     }
 }
