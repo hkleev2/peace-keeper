@@ -63,7 +63,7 @@ public class SpaceController {
     }
 
     @PostMapping("/addspacemember")
-    public Long addSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param, HttpServletRequest request) throws CheckLoginException {
+    public Long addSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param) {
         return spaceMemberService.addSpaceMember(param);
     }
 }
