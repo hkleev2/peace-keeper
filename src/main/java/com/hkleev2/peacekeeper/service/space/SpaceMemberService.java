@@ -16,7 +16,7 @@ public class SpaceMemberService {
     private final SpaceMemberRepository spaceMemberRepository;
 
     @Transactional
-    public Long spaceMember(SpaceMemberParam param) {
+    public Long addSpaceMember(SpaceMemberParam param) {
         SpaceMember spaceMember = param.toSpaceMember();
         spaceMemberRepository.save(spaceMember);
         return spaceMember.getId();

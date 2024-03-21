@@ -28,7 +28,7 @@ public class ChangeSpaceService {
     }
 
     @Transactional
-    public void changeSpacename(Long spaceId, ChangeSpacenameParam param) {
+    public void saveSpaceName(Long spaceId, ChangeSpacenameParam param) {
         Spacename spacename = Spacename.of(param.getSpacename());
 
         Space space = findSpace(spaceId);
