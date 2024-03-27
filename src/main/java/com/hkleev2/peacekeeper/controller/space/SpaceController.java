@@ -50,7 +50,7 @@ public class SpaceController {
         return spaceRequestService.create(param);
     }
 
-    @PatchMapping("/{spaceId}/{requestId}/updaterequest")
+    @PatchMapping("/{spaceId}/{requestId}/updateRequestState")
     public SpaceRequest updateRequestState(@PathVariable Long spaceId, @PathVariable Long requestId, @RequestBody SpaceRequestService.changeRequestStateParam param, HttpServletRequest request) throws CheckSpaceAdminException {
         SpaceRequest spaceRequest = new SpaceRequest();
 
@@ -58,12 +58,19 @@ public class SpaceController {
         if (changeSpaceService.checkSpaceAdmin(MemberUtil.getLoginId(session), spaceId)) {
             spaceRequest = spaceRequestService.saveRequestState(requestId, param);
         }
-
         return spaceRequest;
     }
 
     @PostMapping("/addspacemember")
     public Long addSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param) {
         return spaceMemberService.addSpaceMember(param);
+    }
+
+    @PostMapping("/deletespacemember")
+    public void deleteSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param, HttpServletRequest request) throws CheckSpaceAdminException {
+        HttpSession session = request.getSession();
+        if (changeSpaceService.checkSpaceAdmin(MemberUtil.getLoginId(session), param.getSpaceId())) {
+            spaceMemberService.deleteSpaceMember(param);
+        }
     }
 }

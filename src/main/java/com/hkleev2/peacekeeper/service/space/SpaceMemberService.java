@@ -22,15 +22,22 @@ public class SpaceMemberService {
         return spaceMember.getId();
     }
 
+    @Transactional
+    public void deleteSpaceMember(SpaceMemberParam param) {
+        spaceMemberRepository.deleteById(param.getSpaceId());
+    }
+
     @Getter
     @AllArgsConstructor
     @Builder
     public static class SpaceMemberParam {
+        private Long id;
         private Long spaceId;
         private Long memberId;
 
         public SpaceMember toSpaceMember() {
             return SpaceMember.builder()
+                    .id(id)
                     .spaceId(spaceId)
                     .memberId(memberId)
                     .build();

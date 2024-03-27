@@ -18,13 +18,16 @@ class SpaceRepositoryTest {
 
     @Autowired
     private SpaceRepository spaceRepository;
+
     @Autowired
     private SpaceMemberRepository spaceMemberRepository;
 
+    private Long adminMemberId = 1L;
+    private Long spaceId = 1L;
+    private Long memberId = 1L;
+
     @Test
     void createSpace() {
-        Long adminMemberId = 1L;
-        String spaceKey = "123qwe";
         String spacename = "spacename";
 
         Space space = Space.builder()
@@ -41,9 +44,6 @@ class SpaceRepositoryTest {
 
     @Test
     void spaceMember() {
-        Long spaceId = 1L;
-        Long memberId = 1L;
-
         SpaceMember spaceMember = SpaceMember.builder()
                 .spaceId(spaceId)
                 .memberId(memberId)
@@ -52,6 +52,14 @@ class SpaceRepositoryTest {
         spaceMemberRepository.save(spaceMember);
 
         assertThat(spaceMember.getId()).isNotNull();
+    }
+
+    @Test
+    void deleteSpaceMember() {
+        Long spaceMemberId = 1L;
+
+        spaceMemberRepository.deleteById(spaceMemberId);
+        assertThat(spaceMemberRepository.findById(spaceMemberId).isEmpty());
     }
 
 }
