@@ -32,7 +32,17 @@ public class ChangeSpaceService {
         Spacename spacename = Spacename.of(param.getSpacename());
 
         Space space = findSpace(spaceId);
-        space.changeSpacekname(spacename);
+        space.changeSpacename(spacename);
+    }
+
+    @Transactional
+    public Space changeSpaceAdmin(Long spaceId, ChangeSpaceAdminParam param) {
+        Long adminMemberId = param.getAdminMemberId();
+
+        Space space = findSpace(spaceId);
+        space.changeSpaceAdmin(adminMemberId);
+
+        return space;
     }
 
     private Space findSpace(Long spaceId) {
@@ -44,5 +54,12 @@ public class ChangeSpaceService {
     @Builder
     public static class ChangeSpacenameParam {
         private String spacename;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class ChangeSpaceAdminParam {
+        private Long adminMemberId;
     }
 }

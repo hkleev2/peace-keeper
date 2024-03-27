@@ -33,7 +33,11 @@ public class Space {
     @AttributeOverride(name = "value", column = @Column(name = "created_datetime"))
     private CreatedDateTime createdDateTime;
 
-    public void changeSpacekname(Spacename spacename) {
+    public void changeSpacename(Spacename spacename) {
         this.spacename = spacename;
+    }
+
+    public void changeSpaceAdmin(Long adminMemberId) {
+        this.adminMemberId = adminMemberId;
     }
 }

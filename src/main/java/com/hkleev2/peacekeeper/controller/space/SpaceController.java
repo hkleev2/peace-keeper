@@ -3,6 +3,7 @@ package com.hkleev2.peacekeeper.controller.space;
 import com.hkleev2.peacekeeper.controller.common.customException.CheckLoginException;
 import com.hkleev2.peacekeeper.controller.common.customException.CheckSpaceAdminException;
 import com.hkleev2.peacekeeper.controller.common.util.MemberUtil;
+import com.hkleev2.peacekeeper.domain.space.model.Space;
 import com.hkleev2.peacekeeper.domain.space.model.SpaceRequest;
 import com.hkleev2.peacekeeper.service.space.ChangeSpaceService;
 import com.hkleev2.peacekeeper.service.space.CreateSpaceService;
@@ -66,11 +67,22 @@ public class SpaceController {
         return spaceMemberService.addSpaceMember(param);
     }
 
-    @PostMapping("/deletespacemember")
-    public void deleteSpaceMember(@RequestBody SpaceMemberService.SpaceMemberParam param, HttpServletRequest request) throws CheckSpaceAdminException {
+    @PostMapping("/{spaceId}/deletespacemember")
+    public void deleteSpaceMember(@PathVariable Long spaceId, @RequestBody SpaceMemberService.SpaceMemberParam param, HttpServletRequest request) throws CheckSpaceAdminException {
         HttpSession session = request.getSession();
-        if (changeSpaceService.checkSpaceAdmin(MemberUtil.getLoginId(session), param.getSpaceId())) {
+        if (changeSpaceService.checkSpaceAdmin(MemberUtil.getLoginId(session), spaceId)) {
             spaceMemberService.deleteSpaceMember(param);
         }
+    }
+
+    @PostMapping("/{spaceId}/changespaceadmin")
+    public Space changeSpaceAdmin(@PathVariable Long spaceId, @RequestBody ChangeSpaceService.ChangeSpaceAdminParam param, HttpServletRequest request) throws CheckSpaceAdminException {
+        Space space = new Space();
+
+        HttpSession session = request.getSession();
+        if (changeSpaceService.checkSpaceAdmin(MemberUtil.getLoginId(session), spaceId)) {
+            space = changeSpaceService.changeSpaceAdmin(spaceId, param);
+        }
+        return space;
     }
 }
